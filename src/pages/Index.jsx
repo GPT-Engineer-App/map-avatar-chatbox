@@ -1,18 +1,20 @@
 import React, { useState } from "react";
-import { Box, Image, Text, VStack, HStack, Avatar, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, Button, Input, IconButton } from "@chakra-ui/react";
+import { Box, Text, VStack, HStack, Avatar, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, Input, IconButton } from "@chakra-ui/react";
 import { FaMapMarkerAlt, FaTimes, FaPaperPlane } from "react-icons/fa";
+
+const MapPlaceholder = () => <Box width="100%" height="500px" bg="gray.200" />;
 
 const users = [
   {
     id: 1,
     name: "John Doe",
-    avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxtYWxlJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzA5Njc4MzkyfDA&ixlib=rb-4.0.3&q=80&w=1080',
+    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxtYWxlJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzA5Njc4MzkyfDA&ixlib=rb-4.0.3&q=80&w=1080",
     position: { top: "20%", left: "30%" },
   },
   {
     id: 2,
     name: "Jane Smith",
-    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxmZW1hbGUlMjBwb3J0cmFpdHxlbnwwfHx8fDE3MDk2NzgzOTJ8MA&ixlib=rb-4.0.3&q=80&w=1080',
+    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxmZW1hbGUlMjBwb3J0cmFpdHxlbnwwfHx8fDE3MDk2NzgzOTJ8MA&ixlib=rb-4.0.3&q=80&w=1080",
     position: { top: "40%", left: "50%" },
   },
   // Add more users with positions here
@@ -43,16 +45,13 @@ const Index = () => {
 
   return (
     <Box position="relative" p={5}>
-      {/* Map Image Placeholder */}
-      <Image src="https://images.unsplash.com/photo-1524661135-423995f22d0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHx3b3JsZCUyMG1hcHxlbnwwfHx8fDE3MDk2NzgzOTJ8MA&ixlib=rb-4.0.3&q=80&w=1080" alt="World Map" boxSize="100%" objectFit="cover" />
-
+      <MapPlaceholder />
       {/* User Avatars on the Map */}
       {users.map((user) => (
         <IconButton key={user.id} icon={<FaMapMarkerAlt />} colorScheme="red" variant="ghost" position="absolute" top={user.position.top} left={user.position.left} aria-label={`Marker for ${user.name}`} onClick={() => openChat(user)}>
           <Avatar name={user.name} src={user.avatar} size="sm" />
         </IconButton>
       ))}
-
       {/* Chat Modal */}
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
